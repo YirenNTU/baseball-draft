@@ -68,7 +68,8 @@ begin
     team_key = null,
     picked = false,
     picked_at = null,
-    wants_trade = false;
+    wants_trade = false
+  where true;
   update public.draft_state
   set
     current_team_key = 'a',

@@ -94,7 +94,8 @@ begin
   set
     team_key = null,
     picked = false,
-    picked_at = null;
+    picked_at = null
+  where true;
   update public.draft_state
   set
     current_team_key = 'a',
