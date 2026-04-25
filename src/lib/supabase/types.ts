@@ -62,6 +62,10 @@ export type Database = {
         Args: { p_slug: string; p_team: "a" | "b" };
         Returns: Json;
       };
+      apply_trade: {
+        Args: { p_slug_from_a: string; p_slug_from_b: string };
+        Returns: Json;
+      };
       reset_draft: {
         Args: Record<string, never>;
         Returns: void;
