@@ -28,7 +28,6 @@ async function main() {
       {
         slug: p.slug,
         name: p.name,
-        image_path: p.imagePath,
         title: p.title,
         blurb: p.blurb,
         fun_power: p.funPower,

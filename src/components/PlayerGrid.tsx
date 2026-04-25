@@ -1,8 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { ImageLightbox } from "./ImageLightbox";
-import { PlayerImage } from "./PlayerImage";
 import {
   TEAM_A,
   TEAM_B,
@@ -22,6 +19,11 @@ type Props = {
 
 const teamName = (k: "a" | "b") => (k === "a" ? TEAM_A : TEAM_B);
 
+function nameInitial(name: string) {
+  const t = name.trim();
+  return t ? t[0] : "?";
+}
+
 export function PlayerGrid({
   players,
   currentTeam,
@@ -31,15 +33,9 @@ export function PlayerGrid({
   canPick,
   lastError,
 }: Props) {
-  const [lightboxPlayer, setLightboxPlayer] = useState<PublicPlayer | null>(null);
   const available = players.filter((p) => !p.picked);
   return (
     <div className="space-y-4">
-      <ImageLightbox
-        key={lightboxPlayer?.id ?? "lightbox-off"}
-        player={lightboxPlayer}
-        onClose={() => setLightboxPlayer(null)}
-      />
       {lastError && (
         <p
           className="rounded-lg border border-red-500/50 bg-red-950/50 px-3 py-2 text-sm text-red-200"
@@ -78,14 +74,12 @@ export function PlayerGrid({
               } flex h-full flex-col overflow-hidden rounded-2xl border border-slate-700/80 bg-slate-900/60`}
             >
               <div className="flex gap-3 p-3">
-                <button
-                  type="button"
-                  className="shrink-0 rounded-xl transition ring-offset-2 ring-offset-slate-900 hover:ring-2 hover:ring-amber-500/50 focus:outline-none focus:ring-2 focus:ring-amber-500/60"
-                  onClick={() => setLightboxPlayer(p)}
-                  aria-label={`查看 ${p.name} 大圖`}
+                <div
+                  className="flex h-[100px] w-[100px] shrink-0 items-center justify-center rounded-xl border border-amber-500/20 bg-slate-800/90 text-3xl font-bold text-amber-200/95 ring-2 ring-amber-500/30"
+                  aria-hidden
                 >
-                  <PlayerImage src={p.image_path} name={p.name} size={100} />
-                </button>
+                  {nameInitial(p.name)}
+                </div>
                 <div className="min-w-0 flex-1">
                   <h3 className="truncate font-bold text-amber-100">{p.name}</h3>
                   {boundPartner && (

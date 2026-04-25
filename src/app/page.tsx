@@ -46,7 +46,7 @@ export default function Home() {
               設定環境變數。
             </>
           )}
-          {live && "球員圖可放在 public/players/ 對應檔名，檔案不存在則顯示預設圖。"}
+          {live && "已連 Supabase，多人開啟同一部署網址即可即時同步。"}
         </p>
       </div>
     </div>

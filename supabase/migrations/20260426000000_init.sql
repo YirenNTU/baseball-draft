@@ -5,7 +5,6 @@ create table if not exists public.players (
   id uuid primary key default gen_random_uuid(),
   slug text not null unique,
   name text not null,
-  image_path text not null,
   title text not null,
   blurb text not null,
   fun_power int not null check (fun_power between 0 and 100),

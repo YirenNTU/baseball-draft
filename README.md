@@ -30,13 +30,9 @@ npm run dev
 
 4. **Replication**：確認 `players`、`draft_state` 可 Realtime（migration 已加 publication 者略過）。
 
-## 圖
-
-`public/players/<slug>.(jpg|png)`；缺圖用 `default.svg`。
-
 ## 綁選
 
-兩組同時入隊：**黃則叡**與**宋文郁**、**章舒涵**與**曾貴鴻**（見 `BOUND_SLUG_PAIRS` 於 [`src/data/players.ts`](src/data/players.ts)）。點名其中一人，另一人同隊同次一併入選，輪替仍只換一輪。上線前請在 Supabase 執行 [`supabase/migrations/20260427120000_apply_pick_bound_pairs.sql`](supabase/migrations/20260427120000_apply_pick_bound_pairs.sql)（或專案內全量 migration）。上列四人圖路徑目前為 `default.svg`（未額外放圖也沿用）。
+兩組同時入隊：**黃則叡**與**宋文郁**、**章舒涵**與**曾貴鴻**（見 `BOUND_SLUG_PAIRS` 於 [`src/data/players.ts`](src/data/players.ts)）。點名其中一人，另一人同隊同次一併入選，輪替仍只換一輪。上線前請在 Supabase 執行 [`supabase/migrations/20260427120000_apply_pick_bound_pairs.sql`](supabase/migrations/20260427120000_apply_pick_bound_pairs.sql)（或專案內全量 migration）。介面以姓名字首塊顯示，**不**再使用球員圖檔欄位；既有資料庫請執行 [`supabase/migrations/20260429140000_drop_players_image_path.sql`](supabase/migrations/20260429140000_drop_players_image_path.sql) 若仍有 `image_path` 欄位。
 
 ## 頁面
 

@@ -22,7 +22,6 @@ function buildInitialPlayers(): PublicPlayer[] {
         id: `mock-${s.slug}`,
         slug: s.slug,
         name: s.name,
-        image_path: s.imagePath,
         title: s.title,
         blurb: s.blurb,
         fun_power: s.funPower,

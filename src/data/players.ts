@@ -1,12 +1,10 @@
 /**
  * 可選秀名單（不含隊長；隊長僅在 TEAM_A / TEAM_B）
- * 圖片：public/players/<slug>.(jpg|png)
  */
 
 export type PlayerSeed = {
   slug: string;
   name: string;
-  imagePath: string;
   title: string;
   blurb: string;
   funPower: number;
@@ -33,7 +31,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "chang-yi-jie",
     name: "張亦杰",
-    imagePath: "/players/chang-yi-jie.jpg",
     title: "外野自走監視器｜皮克敏愛好者",
     blurb:
       "外野站位像在等公車，球飛過來先點頭致意再慢慢追。自稱皮克敏愛好者，漏接時會說小藍皮克敏在水裡忙，沒空幫忙撿球。",
@@ -46,7 +43,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "wu-yi-ren",
     name: "吳翌任",
-    imagePath: "/players/wu-yi-ren.jpg",
     title: "一壘釘子戶｜踩壘包像在顧攤",
     blurb: "擊球聲很大，球很客氣。擅長把平凡的一壘安打跑成年度災難片，並在壘上跟對手聊到忘記幾出局。",
     funPower: 71,
@@ -58,7 +54,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "xu-jia-hao",
     name: "許家豪",
-    imagePath: "/players/xu-jia-hao.jpg",
     title: "骰子型投手｜兄弟情濃度超標",
     blurb: "每一球都有驚喜包精神：可能三振、可能暴投、也可能直接把捕手的人生打亂。休息區跟隊友互動自帶 BL 預告片感，但本人堅稱只是戰友情太熱。",
     funPower: 75,
@@ -69,7 +64,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "huang-ze-rui",
     name: "黃則叡",
-    imagePath: "/players/default.svg",
     title: "表情管理失敗王｜揮空也要點評世界",
     blurb: "打擊前看起來很有計畫，揮完之後只剩人生感悟。最擅長把三振講成『我剛剛有抓到感覺』。",
     funPower: 82,
@@ -80,7 +74,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "chen-guan-zhi",
     name: "陳冠志",
-    imagePath: "/players/chen-guan-zhi.jpg",
     title: "一壘吉祥物｜球來就先祈禱",
     blurb: "守備風格主打一個『相信隊友，也相信奇蹟』。球進手套那一刻，全隊會短暫以為今天有神明值班。",
     funPower: 69,
@@ -91,7 +84,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "zhou-shi-xuan",
     name: "周士軒",
-    imagePath: "/players/zhou-shi-xuan.jpg",
     title: "盜壘猴王｜彩虹營業擔當",
     blurb: "只要上壘就開始躁動，像把『不要亂跑』聽成『現在出發』。跑壘路線很直，場邊效果很彎，滑壘完還會對二壘手露出偶像劇級微笑。",
     funPower: 80,
@@ -102,7 +94,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "zhang-shu-han",
     name: "章舒涵",
-    imagePath: "/players/default.svg",
     title: "外野精裝版｜皮克敏野餐組長",
     blurb: "跑起來比大家體面太多，顯得整場比賽突然有美術指導。平常疑似在培養皮克敏大軍，外野漏球時會說那是小紅皮克敏沒跟上。",
     funPower: 77,
@@ -113,7 +104,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "song-wen-yu",
     name: "宋文郁",
-    imagePath: "/players/default.svg",
     title: "休息區脫口秀｜棒球只是副業",
     blurb: "上場前先講三分鐘，打完再講五分鐘。戰力不一定穩定，但氣氛產量保證超標，裁判都想收門票。",
     funPower: 73,
@@ -124,7 +114,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "cai-ming-zhe",
     name: "蔡明哲",
-    imagePath: "/players/cai-ming-zhe.jpg",
     title: "捕手總機｜投手壞掉請按 9",
     blurb: "蹲在本壘後面像客服主管，投手爆炸時負責溫柔地把人類重新開機。配球偶爾神，偶爾像亂按電梯。",
     funPower: 85,
@@ -135,7 +124,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "huang-jun-yang",
     name: "黃君颺",
-    imagePath: "/players/huang-jun-yang.jpg",
     title: "新來的麻煩包｜一上場先製造問號",
     blurb:
       "備賽全大運無法打球，僅提供情緒價值。",
@@ -147,7 +135,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "zeng-gui-hong",
     name: "曾貴鴻",
-    imagePath: "/players/default.svg",
     title: "板凳核彈｜坐著也有壓迫感",
     blurb:
       "還沒上場就已經開始影響比賽，主要是大家一直問他到底什麼時候要動。揮棒像在處理私人恩怨，球如果會說話應該會先道歉。",
@@ -159,7 +146,6 @@ export const PLAYER_SEED: readonly PlayerSeed[] = [
   {
     slug: "mystery-bonus",
     name: "神秘加賽籤",
-    imagePath: "/players/mystery-12.jpg",
     title: "最後一包樂透｜抽到先不要哭",
     blurb: "身分不明、戰力不明、出席率也不明。可能是隱藏王牌，也可能只是來幫忙買水的人，刺激感拉滿。",
     funPower: 50,
@@ -193,7 +179,6 @@ export type PublicPlayer = {
   id: string;
   slug: string;
   name: string;
-  image_path: string;
   title: string;
   blurb: string;
   fun_power: number;

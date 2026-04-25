@@ -4,7 +4,6 @@ import Link from "next/link";
 import { DRAFT_POOL_SIZE, PublicPlayer, TEAM_A, TEAM_B } from "@/data/players";
 import { BRAND } from "@/lib/branding";
 import type { ParticipantRole } from "@/lib/participantRole";
-import { PlayerImage } from "./PlayerImage";
 import { TradeMeSection } from "./TradeMeSection";
 import { TradePanel } from "./TradePanel";
 
@@ -31,6 +30,11 @@ function teamSide(team: "a" | "b", list: PublicPlayer[]) {
 function mvp(players: PublicPlayer[]) {
   if (!players.length) return null;
   return players.reduce((a, b) => (a.fun_power >= b.fun_power ? a : b));
+}
+
+function nameInitial(name: string) {
+  const t = name.trim();
+  return t ? t[0] : "?";
 }
 
 export function ResultBoard({
@@ -83,8 +87,13 @@ export function ResultBoard({
         <h1 className="mt-1 text-3xl font-black tracking-tight text-white">選秀結果</h1>
         <p className="mt-1 text-slate-400">本場最高戰力</p>
         {m && (
-          <div className="mt-4 flex flex-col gap-4 rounded-2xl border border-amber-500/30 bg-amber-950/20 p-4 md:flex-row">
-            <PlayerImage src={m.image_path} name={m.name} size={140} />
+          <div className="mt-4 flex flex-col gap-4 rounded-2xl border border-amber-500/30 bg-amber-950/20 p-4 md:flex-row md:items-start">
+            <div
+              className="mx-auto flex h-36 w-36 shrink-0 items-center justify-center rounded-2xl border border-amber-500/25 bg-slate-800/90 text-5xl font-bold text-amber-200/95 md:mx-0"
+              aria-hidden
+            >
+              {nameInitial(m.name)}
+            </div>
             <div>
               <h2 className="text-2xl font-extrabold text-amber-200">{m.name}</h2>
               <p className="text-sm text-amber-500/90">{m.title}</p>

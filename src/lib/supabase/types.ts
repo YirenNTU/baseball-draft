@@ -9,7 +9,6 @@ export type Database = {
           id: string;
           slug: string;
           name: string;
-          image_path: string;
           title: string;
           blurb: string;
           fun_power: number;
@@ -25,7 +24,6 @@ export type Database = {
           id?: string;
           slug: string;
           name: string;
-          image_path: string;
           title: string;
           blurb: string;
           fun_power: number;

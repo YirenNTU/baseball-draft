@@ -30,7 +30,7 @@ export function LiveDraft({ participantName, role }: Props) {
     const { data: p, error: e1 } = await supa
       .from("players")
       .select(
-        "id, slug, name, image_path, title, blurb, fun_power, quirk, news_headline, display_order, team_key, picked, picked_at, wants_trade"
+        "id, slug, name, title, blurb, fun_power, quirk, news_headline, display_order, team_key, picked, picked_at, wants_trade"
       );
     if (e1) {
       setErr(e1.message);

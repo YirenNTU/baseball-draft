@@ -22,7 +22,7 @@ export function LiveResult({ participantName, role }: Props) {
     const { data, error } = await supa
       .from("players")
       .select(
-        "id, slug, name, image_path, title, blurb, fun_power, quirk, news_headline, display_order, team_key, picked, picked_at, wants_trade"
+        "id, slug, name, title, blurb, fun_power, quirk, news_headline, display_order, team_key, picked, picked_at, wants_trade"
       );
     if (error) {
       setErr(error.message);
