@@ -15,6 +15,12 @@ type Props = {
   role: ParticipantRole;
 };
 
+type DraftSnapshot = {
+  players?: PublicPlayer[];
+  state?: DraftStateRow;
+  error?: string;
+};
+
 export function LiveDraft({ participantName, role }: Props) {
   const [players, setPlayers] = useState<PublicPlayer[]>([]);
   const [state, setState] = useState<DraftStateRow | null>(null);
@@ -26,23 +32,18 @@ export function LiveDraft({ participantName, role }: Props) {
 
   const load = useCallback(async () => {
     setErr(null);
-    const supa = createBrowserClient();
-    const { data: p, error: e1 } = await supa
-      .from("players")
-      .select(
-        "id, slug, name, title, blurb, fun_power, quirk, news_headline, display_order, team_key, picked, picked_at, wants_trade"
-      );
-    if (e1) {
-      setErr(e1.message);
+    const res = await fetch("/api/draft-state", { cache: "no-store" });
+    const body = (await res.json().catch(() => ({}))) as DraftSnapshot;
+    if (!res.ok) {
+      setErr(body.error ?? "讀取選秀狀態失敗");
       return;
     }
-    const { data: s, error: e2 } = await supa.from("draft_state").select("*").single();
-    if (e2) {
-      setErr(e2.message);
+    if (!body.players || !body.state) {
+      setErr("讀取選秀狀態失敗");
       return;
     }
-    setPlayers(mapPlayers(p as PublicPlayer[]));
-    setState(s as DraftStateRow);
+    setPlayers(mapPlayers(body.players));
+    setState(body.state);
   }, []);
 
   useEffect(() => {
@@ -73,6 +74,17 @@ export function LiveDraft({ participantName, role }: Props) {
       void supa.removeChannel(ch);
     };
   }, [load]);
+
+  // Realtime WebSockets are often blocked (corp Wi-Fi, extensions). Polling keeps
+  // other participants in sync when postgres_changes does not fire.
+  const draftActive = Boolean(state && !state.is_complete);
+  useEffect(() => {
+    if (!draftActive) return;
+    const id = setInterval(() => {
+      void load();
+    }, 3000);
+    return () => clearInterval(id);
+  }, [draftActive, load]);
 
   const onToggleTradeMe = useCallback(
     async (slug: string, wantsTrade: boolean) => {

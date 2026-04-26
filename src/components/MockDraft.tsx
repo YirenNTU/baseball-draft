@@ -177,7 +177,7 @@ export function MockDraft({ participantName, role }: MockProps) {
       lastError={err}
       onPick={onPick}
       isSubmitting={isSubmitting}
-      banner="本機預覽 · 不連遠端。上線請設定 .env 連 Supabase。"
+      banner="本機預覽 · 不連遠端、不會多人同步；關閉分頁後選人可能消失。上線請設定 Supabase。"
       tradeAfterDraft={
         state.is_complete
           ? { onToggle: onToggleTradeMe, isSubmitting: false, lastError: meErr }

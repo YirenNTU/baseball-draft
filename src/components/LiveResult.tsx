@@ -7,6 +7,7 @@ import type { ParticipantRole } from "@/lib/participantRole";
 import { ResultBoard } from "./ResultBoard";
 
 type Props = { participantName: string; role: ParticipantRole };
+type DraftSnapshot = { players?: PublicPlayer[]; error?: string };
 
 export function LiveResult({ participantName, role }: Props) {
   const [players, setPlayers] = useState<PublicPlayer[]>([]);
@@ -18,18 +19,18 @@ export function LiveResult({ participantName, role }: Props) {
 
   const load = useCallback(async () => {
     setErr(null);
-    const supa = createBrowserClient();
-    const { data, error } = await supa
-      .from("players")
-      .select(
-        "id, slug, name, title, blurb, fun_power, quirk, news_headline, display_order, team_key, picked, picked_at, wants_trade"
-      );
-    if (error) {
-      setErr(error.message);
+    const res = await fetch("/api/draft-state", { cache: "no-store" });
+    const body = (await res.json().catch(() => ({}))) as DraftSnapshot;
+    if (!res.ok) {
+      setErr(body.error ?? "讀取結果失敗");
+      return;
+    }
+    if (!body.players) {
+      setErr("讀取結果失敗");
       return;
     }
     setPlayers(
-      (data as PublicPlayer[]).sort((a, b) => a.display_order - b.display_order)
+      body.players.sort((a, b) => a.display_order - b.display_order)
     );
   }, []);
 
@@ -53,6 +54,13 @@ export function LiveResult({ participantName, role }: Props) {
     return () => {
       void supa.removeChannel(ch);
     };
+  }, [load]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      void load();
+    }, 4000);
+    return () => clearInterval(id);
   }, [load]);
 
   const onExecuteTrade = useCallback(

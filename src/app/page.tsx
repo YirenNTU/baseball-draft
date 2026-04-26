@@ -2,12 +2,15 @@ import Link from "next/link";
 import { BRAND } from "@/lib/branding";
 import { DRAFT_POOL_SIZE } from "@/data/players";
 
-function hasSupabaseUrl() {
-  return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
+function hasSupabaseConfig() {
+  return (
+    Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL) &&
+    Boolean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+  );
 }
 
 export default function Home() {
-  const live = hasSupabaseUrl();
+  const live = hasSupabaseConfig();
   return (
     <div className="min-h-dvh flex flex-col bg-gradient-to-b from-slate-900 via-slate-950 to-black px-4 py-12 text-slate-100">
       <div className="mx-auto w-full max-w-2xl text-center">
@@ -41,9 +44,9 @@ export default function Home() {
           {!live && (
             <>
               尚未設定 <code className="text-amber-500/80">NEXT_PUBLIC_SUPABASE_URL</code>
-              時，會以本機 Mock 執行，方便你先看畫面。派對前請參考 README
-              建立 Supabase 專案、匯入 migration、執行 seed 並在 Vercel
-              設定環境變數。
+              與 <code className="text-amber-500/80">NEXT_PUBLIC_SUPABASE_ANON_KEY</code>
+              時，會以本機 Mock 執行；Mock 不會多人同步，也不保證重開後保留。
+              派對前請在 Vercel 設定 Supabase 環境變數。
             </>
           )}
           {live && "已連 Supabase，多人開啟同一部署網址即可即時同步。"}
